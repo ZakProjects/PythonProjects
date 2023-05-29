@@ -1,0 +1,24 @@
+#:kivy 2.0
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+<BackgroundColor@Widget>:
+    background_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<BackgroundLabel@Label+BackgroundColor>:
+    background_color: 0, 0, 0, 0
+
+<Classroom>:
+    Main:
+    Rangee1:
+    Rangee2:
+    Rangee3:
+    ProfilePage:
+        id: profile_page
+    Statistics:
+        id: statistics

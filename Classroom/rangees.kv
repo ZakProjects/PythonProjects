@@ -1,0 +1,159 @@
+#:kivy 2.0
+#:import Window kivy.core.window.Window
+
+# Brown belt width / total width : 0.25
+
+<Listing@GridLayout>:
+    cols: 1
+    rows: 5
+    padding: 0.025 * Window.height , 0.0375 * Window.height
+    spacing: 0.05 * Window.height, 0.0875 * Window.height
+    size_hint: (0.24, 1)
+
+<Pic@Button>:
+    background_normal: 'assets/male.jpg'
+    on_press: app.profile_page(self._id)
+<Footer@BoxLayout>:
+    canvas.before:
+        Color:
+            rgba: 0.7, 0.7, 0.7, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    size_hint: (1, 0.05)
+    pos_hint: {'x': 0, 'y': 0}
+    orientation: 'horizontal'
+    spacing: 2
+    padding: 2, 2
+    Button:
+        background_color: 0.1, 0.1, 0.1, .8
+        text_color: 1, 1, 1, 0.9
+        bold: True
+        text: 'Retour'
+        on_press: app.root.current = 'main'
+    Button:
+        background_color: 0.1, 0.1, 0.1, .8
+        text_color: 1, 1, 1, 0.9
+        bold: True
+        text: 'Statistiques'
+        on_press: app.stats()
+    Button:
+        background_color: 0.1, 0.1, 0.1, .8
+        bold: True
+        text_color: 1, 1, 1, 0.9
+        text: 'Liste'
+
+
+<Rangee1@Screen>:
+    name: 'rangee 1'
+    
+    RelativeLayout:
+        pos_hint: {'x': 0, 'y': 0.05}
+        size_hint: (1, 0.95)
+        canvas.before:
+            Rectangle:
+                size: self.size
+                source: 'assets/rangee1.jpg'
+        Listing:
+            pos_hint: {'x': 0, 'y': 0}
+            Pic:
+                _id: 1
+            Pic:
+                _id: 3
+            Pic:
+                _id: 5
+            Pic:
+                _id: 7
+            Pic:
+                _id: 9
+
+        Listing:
+            pos_hint: {'x': 0.76, 'y': 0}
+            Pic:
+                _id: 2
+            Pic:
+                _id: 4
+            Pic:
+                _id: 6
+            Pic:
+                _id: 8
+            Pic:
+                _id: 10
+    
+    Footer:
+
+<Rangee2@Screen>:
+    name: 'rangee 2'
+
+    RelativeLayout:
+        pos_hint: {'x': 0, 'y': 0.05}
+        size_hint: (1, 0.95)
+        canvas.before:
+            Rectangle:
+                size: self.size
+                source: 'assets/rangee2.jpg'
+        Listing:
+            pos_hint: {'x': 0, 'y': 0}
+            Pic:
+                _id: 11
+            Pic:
+                _id: 13
+            Pic:
+                _id: 15
+            Pic:
+                _id: 17
+            Pic:
+                _id: 19
+
+        Listing:
+            pos_hint: {'x': 0.76, 'y': 0}
+            Pic:
+                _id: 12
+            Pic:
+                _id: 14
+            Pic:
+                _id: 16
+            Pic:
+                _id: 18
+            Pic:
+                _id: 20
+        
+    Footer:
+
+<Rangee3@Screen>:
+    name: 'rangee 3'
+
+    RelativeLayout:
+        size_hint: (1, 0.95)
+        pos_hint: {'x': 0, 'y': 0.05}
+        canvas.before:
+            Rectangle:
+                size: self.size
+                source: 'assets/rangee3.jpg'
+        Listing:
+            spacing: 30, 110
+            rows: 4
+            pos_hint: {'x': 0, 'y': 0}
+            Pic:
+                _id: 21
+            Pic:
+                _id: 23
+            Pic:
+                _id: 25
+            Pic:
+                _id: 27
+
+        Listing:
+            spacing: 30, 110
+            rows: 4
+            pos_hint: {'x': 0.76, 'y': 0}
+            Pic:
+                _id: 22
+            Pic:
+                _id: 24
+            Pic:
+                _id: 26
+            Pic:
+                _id: 28
+    
+    Footer:

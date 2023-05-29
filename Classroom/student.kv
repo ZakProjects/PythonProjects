@@ -1,0 +1,296 @@
+#:kivy 2.0
+#:import Window kivy.core.window.Window
+
+<InputRow@TextInput>:
+    foreground_color: 0.8, 0.2, 0, 1
+    font_size: 0.04 * Window.height
+    multiline: False
+    background_color: 0.98, 0.98, 0.98, 1
+    cursor_color: 0, 0, 0, 1
+    halign: 'center'
+<StaticRow@BackgroundLabel>:
+    color: 0, 0, 0, 1
+    halign: 'center'
+    font_size: 0.04 * Window.height
+
+<Remove@Button>:
+    on_press: app.delete_row(self.sem)
+    size_hint: (None, None)
+    size: 35, 35
+    background_normal: 'cross.jpg'
+    background_down: 'cross_down.jpg'
+
+<ProfilePage@Screen>:
+    _id : 1
+    name: 'profile_page'
+    ScrollView:
+        do_scroll_x: False
+        RelativeLayout:
+            id: rel
+            size_hint: (1, None)
+            height: 2.2 * Window.height
+            canvas.before:
+                Color:
+                    rgba: 0.98, 0.98, 0.98, 1
+                Rectangle:
+                    size: rel.size
+            
+            #----------------- TROLL ----------------------
+            Label:
+                text: 'Makin maytchaf hna hbet lta7t hhh'
+                color: 1, 1, 0, 1
+                font_size: 0.065 / (1/Window.width + 1/Window.height)
+                size_hint_y: None
+                size_hint_x: None
+                pos: root.width/2 - self.width/2, rel.height + 0.0625 * Window.height
+        
+            #----------------- TOP ------------------------
+            BoxLayout:
+                canvas.before:
+                    Color:
+                        rgba: 0.5, 0.5, 0.5, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                id: _top
+                orientation: 'horizontal'
+                size_hint: (1, None)
+                height: Window.height * 0.1
+                pos_hint: {'x': 0, 'top': 1}
+                padding: 2
+                
+                Button:
+                    bold: True
+                    text: 'Précédent'
+                    color: 0.95, 0.95, 0.95, 1
+                    background_color: 0, 0, 0, 0.8
+                    size_hint_x: 0.225
+                    font_size: 0.065 /(1/Window.height + 1/Window.width)
+                    on_press: app.previous(root._id)
+                
+                BackgroundLabel:
+                    size_hint_x: 0.55
+                    background_color: 0, 0, 0, 0.9
+                    color: 0.95, 0.95, 0.95, 1
+                    markup: True
+                    font_size: 0.13 /(1/Window.height + 1/Window.width)
+                    text: '[b]1 SM[sub]2[/sub][/b]'
+                Button:
+                    bold: True
+                    text: 'Suivant'
+                    color: 0.95, 0.95, 0.95, 1
+                    background_color: 0, 0, 0, 0.8
+                    font_size: 0.065 /(1/Window.height + 1/Window.width)
+                    size_hint_x: 0.225
+                    on_press: app.profile_page((root._id%28) + 1)
+            #----------------- TOP END -----------------------------
+
+            #----------------- PROFILE PICTURE ---------------------
+            Widget:
+                id: _profile_pic
+                pic: 'assets/male.jpg'
+                canvas:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Rectangle:
+                        # Window.height * 0.1875 + 10 
+                        size: Window.height * 0.3 + 10, Window.height * 0.3 + 10
+                        pos: root.width/2 - (Window.height * 0.3 + 10)/2, _top.y - 1.5*(Window.height * 0.3)
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    Rectangle:
+                        source: self.pic
+                        size: Window.height * 0.3, Window.height * 0.3
+                        pos: root.width/2 - (Window.height * 0.3)/2, (_top.y - 1.5*(Window.height * 0.3)) + 5
+            
+            #----------------- NAME --------------------------------
+            Label:
+                id: _name_field
+                size_hint_y: None
+                size: self.texture_size
+                pos: root.width/2 - self.width/2, (_top.y - 1.5*(Window.height * 0.3) - 5) - self.texture_size[1]
+                font_size: 0.13 / (1/Window.width + 1/Window.height)
+                halign: 'center'
+                valign: 'center'
+                color: 0, 0, 0, 1
+                bold: True
+                italic: True
+                text: 'Prénom Nom'
+            #----------------- END NAME -----------------------------
+
+            #----------------- NOTES --------------------------------
+            TextInput:
+                id: _notes
+                background_color: .9, .9, .9, 1
+                cursor_color: 0, 0, 0, 1
+                text: "Notes"
+                font_size: 0.1 / (1/Window.width + 1/Window.height)
+                size_hint: (0.75, None)
+                height: Window.height * 0.2
+                pos: root.width/2 - self.width/2, _name_field.y - 40 - self.height
+            #---------------- END NOTES -------------------------------
+
+            #---------------- 1er Semestre ----------------------------
+            BackgroundLabel:
+                id: _header1
+                background_color: 0.26, 0.26, 0.26, 1
+                size_hint: (0.8, None)
+                height: Window.height * 0.1
+                x: root.width/2 - self.width/2
+                # top: _save_button.y - 40
+                top: _notes.y - (0.05 * Window.height)
+                color: 0, 0, 0, 1
+                markup: True
+                text: '1[sup]er[/sup] Semestre'
+                bold: True
+                font_size: 0.13 / (1/Window.height + 1/Window.width)
+            GridLayout:
+                id: _sem1
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                spacing: 0.003 * Window.height
+                padding: 0.003 * Window.height
+                cols: 2
+                size_hint: (0.8, None)
+                x: root.width/2 - self.width/2
+                top: _header1.y
+                height: 0.4 * Window.height
+                StaticRow:
+                    background_color: 0.29, 0.29, 0.29, 1
+                    text: 'Contrôle'
+                StaticRow:
+                    background_color: 0.29, 0.29, 0.29, 1
+                    text: 'Note'
+                StaticRow:
+                    background_color: 0.29, 0.29, 0.29, 1
+                    text: '1'
+                InputRow:
+                    id: _ctrl1_sem1
+                StaticRow:
+                    background_color: 0.29, 0.29, 0.29, 1
+                    text: '2'
+                InputRow:
+                    id: _ctrl2_sem1
+                StaticRow:
+                    background_color: 0.29, 0.29, 0.29, 1
+                    text: '3'
+                InputRow:
+                    id: _ctrl3_sem1
+                StaticRow:
+                    background_color: 0.29, 0.29, 0.29, 1
+                    text: '4'
+                InputRow:
+                    id: _ctrl4_sem1
+                StaticRow:
+                    background_color: 0.29, 0.29, 0.29, 1
+                    text: '5'
+                InputRow:
+                    id: _ctrl5_sem1
+            
+            BackgroundLabel:
+                background_color: 0.26, 0.26, 0.26, 1
+                id: _m1
+                size_hint: (0.8, None)
+                height: 0.06 * Window.height
+                x: root.width/2 - self.width/2
+                top: _sem1.y
+                bold: True
+                text: 'Moyenne : 00.00'
+                font_size: 0.1 / (1/Window.height + 1/Window.width)
+                color: 0.9, 0.9, 0.9, 1
+            #----------------- END 1ER SEMESTRE----------------------------
+            #----------------- 2EME SEMESTRE ------------------------------
+            BackgroundLabel:
+                id: _header2
+                background_color: 0.26, 0.26, 0.26, 1
+                size_hint: (0.8, None)
+                height: 0.1 * Window.height
+                x: root.width/2 - self.width/2
+                top: _m1.y - (0.05 * Window.height)
+                color: 0, 0, 0, 1
+                markup: True
+                text: '2[sup]ème[/sup] Semestre'
+                bold: True
+                font_size: 0.13 / (1/Window.height + 1/Window.width)
+            GridLayout:
+                id: _sem2
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                spacing: 0.003 * Window.height
+                padding: 0.003 * Window.height
+                cols: 2
+                size_hint: (0.8, None)
+                x: root.width/2 - self.width/2
+                top: _header2.y
+                height: 0.4 * Window.height
+                StaticRow:
+                    background_color: 0.29, 0.29, 0.29, 1
+                    text: 'Contrôle'
+                StaticRow:
+                    background_color: 0.29, 0.29, 0.29, 1
+                    text: 'Note'
+                StaticRow:
+                    background_color: 0.29, 0.29, 0.29, 1
+                    text: '1'
+                InputRow:
+                    id: _ctrl1_sem2
+                StaticRow:
+                    background_color: 0.29, 0.29, 0.29, 1
+                    text: '2'
+                InputRow:
+                    id: _ctrl2_sem2
+                StaticRow:
+                    background_color: 0.29, 0.29, 0.29, 1
+                    text: '3'
+                InputRow:
+                    id: _ctrl3_sem2
+                StaticRow:
+                    background_color: 0.29, 0.29, 0.29, 1
+                    text: '4'
+                InputRow:
+                    id: _ctrl4_sem2
+                StaticRow:
+                    background_color: 0.29, 0.29, 0.29, 1
+                    text: '5'
+                InputRow:
+                    id: _ctrl5_sem2
+            BackgroundLabel:
+                background_color: 0.26, 0.26, 0.26, 1
+                id: _m2
+                size_hint: (0.8, None)
+                height: 0.06 * Window.height
+                x: root.width/2 - self.width/2
+                top: _sem2.y
+                bold: True
+                text: 'Moyenne : 00.00'
+                font_size: 0.1 / (1/Window.height + 1/Window.width)
+                color: 0.9, 0.9, 0.9, 1
+            #--------------------- END 2EME SEMESTRE----------------------
+            #----------------- TROLL ----------------------
+            Label:
+                text: 'Makin maytchaf hna tla3 lfo9 hhh'
+                color: 1, 1, 0, 1
+                font_size: 0.065 / (1/Window.width + 1/Window.height)
+                size_hint_y: None
+                size_hint_x: None
+                pos: root.width/2 - self.width/2, -0.1 * Window.height
+    
+    Button:
+        on_press: app.confirm_changes(root._id)
+        id: _save_button
+        text: 'Appliquer'
+        bold: True
+        font_size: 0.11375 / (1/Window.height + 1/Window.width)
+        text_color: 1, 1, 1, 0.8
+        background_color: 0.1, 1, 0.1, 1
+        size_hint: (0.85, None)
+        x : root.width/2 - self.width/2
+        height: 0.0625 * Window.height

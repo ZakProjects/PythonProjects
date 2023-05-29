@@ -1,0 +1,30 @@
+#:kivy 2.0
+<TransButton@Button>:
+    background_normal: ''
+    background_color: 37/255, 37/255, 32/255, 0
+    on_press: app.select_column(self.num)
+
+<Main@Screen>:
+    canvas.before:
+        Rectangle:
+            size: root.size
+            source: 'assets/class.jpg'
+    name: 'main'
+    AnchorLayout:    
+        anchor_x: 'left'
+        anchor_y: 'top'
+        padding: 10, self.height/6, 10, 30
+        
+        GridLayout:
+            cols: 3
+            rows: 1
+            spacing: 40
+
+            TransButton:
+                num: 1
+        
+            TransButton:
+                num: 2
+
+            TransButton:
+                num: 3

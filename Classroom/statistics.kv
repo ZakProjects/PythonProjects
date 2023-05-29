@@ -1,0 +1,157 @@
+#:kivy 2.0
+#:import statistics statistics
+#:import Window kivy.core.window.Window
+
+<GeneralInfo@RelativeLayout>:
+    canvas.before:
+        Color:
+            rgba: 0.98, 0.98, 0.98, 1
+        Rectangle:
+            size: self.size
+        
+    Label:
+        id: _class
+        size_hint: (None, None)
+        size: self.texture_size
+        color: 0, 0, 0, 1
+        font_name: 'futura.ttf'
+        font_size: 0.195 / (1/Window.width + 1/Window.height)
+        markup: True
+        text: "[u][b]1[/u][sup]ère[/sup] [u]SM 2[/b][/u]"
+        pos_hint: {'center_x': 0.5, 'top': 0.95}
+    Label:
+        id: school
+        size_hint: (None, None)
+        size: self.texture_size
+        color: 0, 0, 0, 1
+        font_name: 'futura.ttf'
+        font_size: 0.13 / (1/Window.width + 1/Window.height)
+        text: "Groupe Scolaire\nAzhar Erriad 2"
+        pos_hint: {'center_x': 0.5}
+        y: _class.y - self.height
+    Label:
+        id: students
+        size_hint: (None, None)
+        size: self.texture_size
+        color: 0, 0, 0, 1
+        font_name: 'futura.ttf'
+        font_size: 0.11375 / (1/Window.width + 1/Window.height)
+        markup: True
+        text: "[u][color=#2a9e20]Nombre d'élèves:[/color][/u] 28"
+        pos_hint: {'center_x': 0.5}
+        y : school.y - self.height - (0.05 * Window.height)
+            
+    Label:
+        id: _moyennes
+        size_hint: (None, None)
+        size: self.texture_size
+        color: .2, .1, .7, 1
+        font_name: 'futura.ttf'
+        font_size: 0.13 / (1/Window.width + 1/Window.height)
+        markup: True
+        text: "[b][u]Moyennes[/b][/u]"
+        pos_hint: {'center_x': 0.5}
+        y: students.y - self.height - (0.05 * Window.height)
+            
+    Label:
+        size_hint: (None, None)
+        size: self.texture_size
+        id: sem1
+        color: 0, 0, 0, 1
+        font_name: 'futura.ttf'
+        font_size: 0.06825 / (1/Window.width + 1/Window.height)
+        markup: True
+        pos_hint: {'x': 0.05}
+        y: _moyennes.y - self.height - (0.0375 * Window.height)
+
+    Label:
+        size_hint: (None, None)
+        size: self.texture_size
+        id: sem2
+        color: 0, 0, 0, 1
+        font_name: 'futura.ttf'
+        font_size: 0.06825 / (1/Window.width + 1/Window.height)
+        markup: True
+        pos_hint: {'x': 0.05}
+        top: sem1.y - self.height - (0.0375 * Window.height)
+
+<Moyennes@RelativeLayout>:
+    canvas.before:
+        Color:
+            rgba: 0.043137, 0.49803, 0.67058, 1
+        Rectangle:
+            size: (self.width, self.height*0.2)
+            pos: 0, self.height * 0.85
+        Color:
+            rgba: 0.98, 0.98, 0.98, 1
+        Rectangle:
+            size: (self.width, self.height*0.85)
+            pos: 0, 0
+    
+    Label:
+        size_hint: (None, None)
+        size: self.texture_size
+        pos_hint: {'center_x': 0.5, 'top': 0.95}
+        color: 1, 1, 1, 1
+        font_name: 'futura.ttf'
+        font_size: 35
+        markup: True
+        text: "[b]Moyennes De Classe[/b]"
+    
+    RelativeLayout:
+        id: plot
+        size_hint: (1, 0.85)
+        pos_hint: {'x': 0, 'y': 0}
+
+<Classement@RelativeLayout>:
+    size: root.size
+    txt: ''
+    canvas.before:
+        Color:
+            rgba: 0.043137, 0.49803, 0.67058, 1
+        Rectangle:
+            size: (self.width, self.height*0.15)
+            pos: 0, self.height * 0.85
+        Color:
+            rgba: 0.98, 0.98, 0.98, 1
+        Rectangle:
+            size: (self.width, self.height*0.85)
+            pos: 0, 0
+    
+    Label:
+        size_hint: None, None
+        size: self.texture_size
+        pos_hint: {'center_x': 0.5, 'top': 0.95}
+        color: 1, 1, 1, 1
+        font_name: 'futura.ttf'
+        font_size: 30
+        markup: True
+        halign: 'center'
+        text: root.txt
+    RelativeLayout:
+        id: container
+        pos_hint: {'center_x':0.5, 'y':0}
+        size_hint: (1, 0.85)
+
+<Statistics>:
+    name: 'statistics'
+    Carousel:
+        direction: 'right'
+        size_hint: (None, None)
+        size: Window.size
+        GeneralInfo:
+            id: general_info
+        Moyennes:
+            id: moyennes
+        Classement:
+            id: classement_1
+            txt: "[b]Premiers Elèves Par Moyenne\nSemestre I[/b]"
+        Classement:
+            id: classement_2
+            txt: "[b]Premiers Elèves Par Moyenne\nSemestre II[/b]"
+        Classement:
+            id: classement_3
+            txt: "[b]Derniers Elèves Par Moyenne\nSemestre I[/b]"
+        Classement:
+            id: classement_4
+            txt: "[b]Derniers Elèves Par Moyenne\nSemestre II[/b]"
